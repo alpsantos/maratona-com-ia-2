@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: encontros-tech
-        image: alpsantos/encontros-tech:v1.0
+        image: alpsantos/encontros-tech-2:latest
         ports:
         - containerPort: 8000
         env:
