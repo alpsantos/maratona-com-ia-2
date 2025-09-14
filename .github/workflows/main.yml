@@ -61,3 +61,5 @@ jobs:
           manifests: |
             k8s/deployment.yaml
           namespace: default
+          substitutions: |
+            DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }} 

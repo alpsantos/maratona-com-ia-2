@@ -14,8 +14,6 @@ spec:
       labels:
         app: encontros-tech
     spec:
-      imagePullSecrets:
-      - name: dockerhub-credentials
       containers:
       - name: encontros-tech
         image: alpsantos/encontros-tech-2:latest
@@ -23,7 +21,7 @@ spec:
         - containerPort: 8000
         env:
         - name: DATABASE_URL
-          value: "postgresql://doadmin:{{DATABASE_PASSWORD}}@private-db-bootcamp-do-user-25868834-0.e.db.ondigitalocean.com:25060/defaultdb?sslmode=require"
+          value: "postgresql://doadmin:#{DATABASE_PASSWORD}#@private-db-bootcamp-do-user-25868834-0.e.db.ondigitalocean.com:25060/defaultdb?sslmode=require"
         - name: APP_TITLE
           value: "Encontros Tech"
         - name: DEBUG
