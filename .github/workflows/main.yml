@@ -39,7 +39,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ vars.DOCKERHUB_USERNAME }}/encontros-tech:latest
+          tags: ${{ vars.DOCKERHUB_USERNAME }}/encontros-tech-2:latest
 
   cd:
     runs-on: ubuntu-latest
