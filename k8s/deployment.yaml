@@ -14,6 +14,8 @@ spec:
       labels:
         app: encontros-tech
     spec:
+      imagePullSecrets:
+      - name: dockerhub-credentials
       containers:
       - name: encontros-tech
         image: alpsantos/encontros-tech-2:latest
