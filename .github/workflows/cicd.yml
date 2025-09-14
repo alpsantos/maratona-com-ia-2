@@ -1,0 +1,32 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: CI Steps
+        run: |
+          echo "Running CI steps..."
+          echo "CI steps completed."
+
+  cd:
+    runs-on: ubuntu-latest
+    needs: ci
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: CD Steps
+        run: |
+          echo "Running CD steps..."
+          echo "CD steps completed."
