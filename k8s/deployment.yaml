@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: encontros-tech
+  labels:
+    app: encontros-tech
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: encontros-tech
+  template:
+    metadata:
+      labels:
+        app: encontros-tech
+    spec:
+      containers:
+      - name: encontros-tech
+        image: alpsantos/encontros-tech:v1.0
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DATABASE_URL
+          value: "postgresql://doadmin:{{DATABASE_PASSWORD}}@private-db-bootcamp-do-user-25868834-0.e.db.ondigitalocean.com:25060/defaultdb?sslmode=require"
+        - name: APP_TITLE
+          value: "Encontros Tech"
+        - name: DEBUG
+          value: "False"
+        - name: HOST
+          value: "0.0.0.0"
+        - name: PORT
+          value: "8000"
+        - name: LOG_LEVEL
+          value: "INFO"
+        - name: LOG_FORMAT
+          value: "simple"
+        - name: SERVICE_NAME
+          value: "encontros-tech"
+        - name: SERVICE_VERSION
+          value: "1.0.0"
+        - name: PROMETHEUS_MULTIPROC_DIR
+          value: "/tmp/prometheus_multiproc"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: encontros-tech-service
+spec:
+  selector:
+    app: encontros-tech
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+  type: LoadBalancer

@@ -1,0 +1,6 @@
+.git
+.gitignore
+pytest.ini
+src/tests
+api-requests.http
+.env
