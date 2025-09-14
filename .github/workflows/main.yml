@@ -55,11 +55,13 @@ jobs:
           method: kubeconfig
           kubeconfig: ${{ secrets.KUBE_CONFIG }}
 
+      - name: Substitute secrets in deployment
+        run: |
+          sed -i "s|#{DATABASE_PASSWORD}#|${{ secrets.DATABASE_PASSWORD }}|g" k8s/deployment.yaml
+
       - name: Deploy to K8s
         uses: azure/k8s-deploy@v5
         with:
           manifests: |
             k8s/deployment.yaml
-          namespace: default
-          substitutions: |
-            DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }} 
+          namespace: default 
